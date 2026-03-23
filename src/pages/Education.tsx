@@ -3,32 +3,48 @@ import { Helmet } from "react-helmet-async";
 
 export default function Education() {
   return (
-    <section className="space-y-8 max-w-3xl mx-auto animate-in fade-in duration-500">
+    <section className="space-y-10 max-w-4xl mx-auto">
       <Helmet>
         <title>Formation — Asma Bajadda</title>
         <meta name="description" content="Mon parcours académique : Licence Systèmes Informatiques Répartis, DEUST et formation scientifique." />
       </Helmet>
 
-      <div className="space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Formation</h2>
-        <p className="text-muted-foreground">Mon parcours académique et diplômes obtenus.</p>
-      </div>
+      <header className="space-y-4 border-b border-zinc-800 pb-6">
+        <h1 className="text-3xl sm:text-4xl font-bold text-zinc-100 tracking-tight">Formation</h1>
+        <p className="text-lg text-zinc-400">
+          Mon parcours académique et diplômes obtenus.
+        </p>
+      </header>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         {education.map((edu, index) => (
-          <article key={index} className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-border/40 pb-6 last:border-0 hover:bg-muted/10 p-4 -mx-4 rounded-xl transition-colors">
-            <div className="space-y-1">
-              <h3 className="font-bold text-lg">{edu.degree} {edu.field ? `en ${edu.field}` : ""}</h3>
-              <p className="font-medium text-primary/80">{edu.school}{edu.location ? `, ${edu.location}` : ""}</p>
-              {edu.courses && edu.courses.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2 pt-2">
-                  {edu.courses.map(course => <span key={course} className="px-2.5 py-1 bg-secondary/40 text-secondary-foreground rounded-md text-xs font-mono">{course}</span>)}
+          <article key={index} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-xl">
+            <header className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-zinc-100 leading-tight">
+                  {edu.degree} {edu.field ? `en ${edu.field}` : ""}
+                </h2>
+                <h3 className="text-lg text-blue-400 font-medium mt-2">
+                  {edu.school}{edu.location ? `, ${edu.location}` : ""}
+                </h3>
+              </div>
+              <span className="inline-flex items-center justify-center px-4 py-1.5 bg-zinc-950 text-zinc-300 text-sm font-medium rounded-full border border-zinc-800 whitespace-nowrap self-start">
+                {edu.start} — {edu.end || "Présent"}
+              </span>
+            </header>
+
+            {edu.courses && edu.courses.length > 0 && (
+              <div className="pt-6 border-t border-zinc-800">
+                <h4 className="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-4">Modules majeurs</h4>
+                <div className="flex flex-wrap gap-2">
+                  {edu.courses.map(course => (
+                    <span key={course} className="px-3 py-1.5 bg-zinc-950 text-zinc-300 rounded-lg text-xs font-medium border border-zinc-800">
+                      {course}
+                    </span>
+                  ))}
                 </div>
-              )}
-            </div>
-            <div className="shrink-0 text-sm font-mono text-muted-foreground bg-secondary/20 px-3 py-1 rounded-full self-start">
-              {edu.start} — {edu.end || "Présent"}
-            </div>
+              </div>
+            )}
           </article>
         ))}
       </div>
