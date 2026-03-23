@@ -7,41 +7,54 @@ export default function RootLayout() {
     { to: "/experience", label: "Expérience" },
     { to: "/education", label: "Formation" },
     { to: "/certifications", label: "Certifications" },
-    { to: "/contact", label: "Contact" }
+    { to: "/contact", label: "Contact" },
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-blue-500/30 flex flex-col">
-      <header className="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-50">
+    <div className="flex min-h-screen flex-col bg-zinc-950 text-zinc-100 selection:bg-blue-500/30">
+      <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between py-4 md:py-5 gap-4 md:gap-8">
-            <NavLink to="/" className="text-2xl font-bold tracking-tight text-zinc-100 hover:text-blue-400 transition-colors whitespace-nowrap">
+          <div className="flex flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between md:py-5">
+            <NavLink
+              to="/"
+              className="w-fit text-2xl font-bold tracking-tight text-zinc-100 transition hover:text-blue-400"
+            >
               Asma Bajadda
             </NavLink>
-            <nav className="flex flex-wrap md:flex-nowrap items-center gap-4 md:gap-8 overflow-x-auto pb-2 md:pb-0 scrollbar-hide text-sm font-medium">
-              {links.map(link => (
-                <NavLink 
-                  key={link.to} 
-                  to={link.to} 
-                  className={({isActive}) => 
-                    `whitespace-nowrap transition-colors hover:text-blue-400 ${isActive ? "text-blue-400 font-bold" : "text-zinc-300"}`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
+
+            <nav className="overflow-x-auto">
+              <ul className="flex min-w-max items-center gap-5 pb-1 text-sm font-medium md:gap-7">
+                {links.map((link) => (
+                  <li key={link.to}>
+                    <NavLink
+                      to={link.to}
+                      className={({ isActive }) =>
+                        [
+                          "whitespace-nowrap border-b-2 pb-1 transition",
+                          isActive
+                            ? "border-blue-400 text-blue-400"
+                            : "border-transparent text-zinc-300 hover:border-zinc-600 hover:text-zinc-100",
+                        ].join(" ")
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
             </nav>
           </div>
         </div>
       </header>
-      
-      <main className="flex-grow mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 md:py-14 lg:px-8">
         <Outlet />
       </main>
 
-      <footer className="border-t border-zinc-800 py-10 mt-auto text-center text-sm text-zinc-500">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          &copy; {new Date().getFullYear()} • Asma Bajadda. Étudiante en Licence SIR.
+      <footer className="mt-auto border-t border-zinc-800">
+        <div className="mx-auto max-w-6xl px-4 py-8 text-center text-sm text-zinc-500 sm:px-6 lg:px-8">
+          &copy; {new Date().getFullYear()} • Asma Bajadda • Étudiante en
+          Licence SIR
         </div>
       </footer>
     </div>
